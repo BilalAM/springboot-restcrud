@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Products</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+
+	<h3>New Product</h3>
+	<form action="/new" method="post">
+		<div class="form-group">
+			<label for="email">Product Name:</label> <input type="text"
+				class="form-control" name="name" />
+		</div>
+		<div class="form-group">
+			<label for="email">Product Price</label>
+			<input type="number"
+				class="form-control" name="price" />
+		</div>
+		<div class="form-group">
+			<label for="email">Product Quantity</label> <input type="number"
+				class="form-control" name="quantity" />
+		</div>
+		
+		<button type="submit" class="btn btn-success">Save</button>
+	</form>
+
+
+	<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
