@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Product</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+	<div class="table-responsive">
+		<form action="/edit" method="post">
+			<table class="table">
+				<tr>
+					<td>NAME</td>
+					<td><input name="name" id="name" type="text"
+						th:value="${item.name}" /></td>
+				</tr>
+				<tr>
+					<td>QUANTITY</td>
+					<td><input name = "quantity" type="text" id="quantity"
+						th:value="${item.quantity}" /></td>
+
+				</tr>
+				<tr>
+					<td>PRICE</td>
+					<td><input name = "price" type="text" id="price" th:value="${item.price}" /></td>
+				</tr>
+
+				<tr>
+					<td><input type="hidden" name="id" th:value="${item.id}" />
+						<button type="submit" class="btn btn-dark">Save Edits</button></td>
+				</tr>
+
+			</table>
+		</form>
+	</div>
+</body>
+</html>

@@ -9,25 +9,70 @@
 <link rel="stylesheet" th:href="@{/css/main.css}"
 	href="../../css/main.css" />
 
+
+
+
 </head>
 <body>
 
 
-	<h1>HELLO FROM SPRINGBOOT MVC WITH JPA AND THYMLEAF TEMPLATE :)</h1>
-	<h2>Hello Again :)</h2>
-	<div class="table-responsive">
-		<table class="table">
-			<tbody>
+
+	<!-- 	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<div class="table-responsive">
+			<table class="table">
+				<tr>
+					<th>ID</th>
+					<th>PRODUCT NAME</th>
+					<th>VIEW</th>
+				</tr>
+
 				<tr th:each="item : ${items}">
 					<td th:text="${item.id}"></td>
 					<td th:text="${item.name}"></td>
-
+					<td><a th:href="${'/item/view/' + item.id}">View</a></td>
+					<td>
+						<form action="/delete" method="post">
+							<input type="hidden" name="id" th:value="${item.id}" />
+							<button type="submit" class="btn btn-dark"
+								onclick="return confirm('Sure you want to delete')">Delete</button>
+						</form>
+					</td>
 				</tr>
-			</tbody>
-		</table>
+
+			</table>
+		</div>
 	</div>
+-->
 
-
+	<h3>PRODUCTS</h3>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="container-fluid">
+				<div class="row">
+					<div class='col-md-4' th:each="item : ${items}">
+						<div class="card">
+							<div class="card-block">
+								<h4 class="card-title" th:text="${item.name}"></h4>
+								<p th:text="${item.quantity}">Item Quantity</p>
+								<p th:text="${item.price}"></p>
+							</div>
+							<div class="card-footer">
+								<a th:href="${'/item/view/' + item.id}" style="display: inline;">View</a>
+								<form action="/delete" method="post" style="display: inline;">
+									<input type="hidden" name="id" th:value="${item.id}" />
+									<button type="submit" class="btn btn-dark"
+										onclick="return confirm('Sure you want to delete')">Delete</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
 	<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

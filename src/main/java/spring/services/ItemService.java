@@ -35,7 +35,11 @@ public class ItemService {
 	}
 
 	public void updateItem(int id, Item item) {
+	
 		itemRepo.save(item);
 	}
 
+	
+	
+	
 }

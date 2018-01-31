@@ -22,14 +22,15 @@ public class ItemController {
 	private ItemService itemService;
 
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public String products(Model model) {
+	public String getAllProducts(Model model) {
 		model.addAttribute("items", itemService.getAllItems());
 		return "products";
 	}
 
-	@RequestMapping("/item/{id}")
-	public Item getItem(@PathVariable int id) {
-		return itemService.getItem(id);
+	@RequestMapping(value = "/item/view/{id}", method = RequestMethod.GET)
+	public String view(@PathVariable int id, Model model) {
+		model.addAttribute("item", itemService.getItem(id));
+		return "view";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/create")
@@ -38,7 +39,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/new")
-	public String addItem(@RequestParam String name , @RequestParam int quantity , @RequestParam double price) {
+	public String addItem(@RequestParam String name, @RequestParam int quantity, @RequestParam double price) {
 		Item item = new Item();
 		item.setName(name);
 		item.setPrice(price);
@@ -47,14 +48,22 @@ public class ItemController {
 		return "redirect:/items";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/item/{id}")
-	public void updateItem(@RequestBody Item item, @PathVariable int id) {
-		itemService.updateItem(id, item);
+	@RequestMapping(method = RequestMethod.POST, value = "/edit")
+	public String updateItem(@RequestParam String name, @RequestParam int quantity, @RequestParam double price,
+			@RequestParam int id) {
+		Item item = itemService.getItem(id);
+		item.setId(id);
+		item.setName(name);
+		item.setPrice(price);
+		item.setQuantity(quantity);
+		itemService.updateItem(id, item);;
+		return "redirect:/items";
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/item/{id}")
-	public void deleteItem(@PathVariable int id) {
+	@RequestMapping(method = RequestMethod.POST, value = "/delete")
+	public String deleteItem(@RequestParam int id) {
 		itemService.deleteItem(id);
+		return "redirect:/items";
 	}
 
 }
