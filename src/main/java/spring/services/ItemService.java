@@ -16,6 +16,9 @@ public class ItemService {
 	@Autowired
 	private ItemRepository itemRepo;
 
+	@Autowired
+	private TaxService taxService;
+
 	public List<Item> getAllItems() {
 		List<Item> items = new ArrayList<>();
 		itemRepo.findAll().forEach(items::add);
@@ -27,6 +30,8 @@ public class ItemService {
 	}
 
 	public void addItem(Item item) {
+		double pricePerQuantity = getTotalPricePerQuantity(item);
+		item.setPrice(taxService.enforceTax(pricePerQuantity, 11.5));
 		itemRepo.save(item);
 	}
 
@@ -35,11 +40,20 @@ public class ItemService {
 	}
 
 	public void updateItem(int id, Item item) {
-	
+
 		itemRepo.save(item);
 	}
 
-	
-	
-	
+	public double getWholeSum() {
+		double sum = 0;
+		for (Item item : getAllItems()) {
+			sum += item.getPrice();
+		}
+		return sum;
+	}
+
+	public double getTotalPricePerQuantity(Item item) {
+		return item.getPrice() * item.getQuantity();
+	}
+
 }

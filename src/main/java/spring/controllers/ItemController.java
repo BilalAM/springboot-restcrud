@@ -1,17 +1,12 @@
 package spring.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import spring.models.Item;
 import spring.services.ItemService;
 
@@ -24,6 +19,7 @@ public class ItemController {
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
 	public String getAllProducts(Model model) {
 		model.addAttribute("items", itemService.getAllItems());
+		model.addAttribute("sum", itemService.getWholeSum());
 		return "products";
 	}
 
@@ -56,7 +52,7 @@ public class ItemController {
 		item.setName(name);
 		item.setPrice(price);
 		item.setQuantity(quantity);
-		itemService.updateItem(id, item);;
+		itemService.updateItem(id, item);
 		return "redirect:/items";
 	}
 
