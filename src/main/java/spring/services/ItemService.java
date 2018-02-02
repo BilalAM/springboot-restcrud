@@ -48,7 +48,7 @@ public class ItemService {
 	public double getWholeSum() {
 		double sum = 0;
 		for (Item item : getAllItems()) {
-			sum += item.getPrice();
+			sum += (item.getPrice() * item.getQuantity());
 		}
 		return sum;
 	}
