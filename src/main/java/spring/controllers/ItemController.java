@@ -35,23 +35,28 @@ public class ItemController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/new")
-	public String addItem(@RequestParam String name, @RequestParam int quantity, @RequestParam double price) {
+	public String addItem(@RequestParam String name, @RequestParam int quantity, @RequestParam double price,
+			@RequestParam String description, @RequestParam String image) {
 		Item item = new Item();
 		item.setName(name);
 		item.setPrice(price);
 		item.setQuantity(quantity);
+		item.setDescription(description);
+		item.setImage(image);
 		itemService.addItem(item);
 		return "redirect:/items";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/edit")
 	public String updateItem(@RequestParam String name, @RequestParam int quantity, @RequestParam double price,
-			@RequestParam int id) {
+			@RequestParam String description, @RequestParam String image, @RequestParam int id) {
 		Item item = itemService.getItem(id);
 		item.setId(id);
 		item.setName(name);
 		item.setPrice(price);
 		item.setQuantity(quantity);
+		item.setDescription(description);
+		item.setImage(image);
 		itemService.updateItem(id, item);
 		return "redirect:/items";
 	}

@@ -51,12 +51,20 @@
 		<div class="col-md-8">
 			<div class="container-fluid">
 				<div class="row">
-					<div class='col-md-3' th:each="item : ${items}">
+					<div class='col-md-4' th:each="item : ${items}">
 						<div class="card">
 							<div class="card-block">
 								<h4 class="card-title" th:text="${item.name}"></h4>
-								<p th:text="${item.quantity}">Item Quantity</p>
-								<p th:text="${item.price}"></p>
+								<table class="table">
+									<tr>
+										<td>QUANTITY</td>
+										<td th:text="${item.quantity}"></td>
+									</tr>
+									<tr>
+										<td>UNIT PRICE(without tax)</td>
+										<td th:text="${item.price}"></td>
+									</tr>
+								</table>
 							</div>
 							<div class="card-footer">
 								<a th:href="${'/item/view/' + item.id}" style="display: inline;">View</a>

@@ -22,15 +22,25 @@
 				</tr>
 				<tr>
 					<td>QUANTITY</td>
-					<td><input name = "quantity" type="text" id="quantity"
+					<td><input name="quantity" type="text" id="quantity"
 						th:value="${item.quantity}" /></td>
 
 				</tr>
 				<tr>
 					<td>PRICE</td>
-					<td><input name = "price" type="text" id="price" th:value="${item.price}" /></td>
+					<td><input name="price" type="text" id="price"
+						th:value="${item.price}" /></td>
 				</tr>
-
+				<tr>
+					<td>DESCRIPTION</td>
+					<td><input name="description" type="text" id="description"
+						th:value="${item.description}" /></td>
+				</tr>
+				<tr>
+					<td>IMAGE</td>
+					<td><input name="image" type="text" id="image"
+						th:value="${item.image}" /></td>
+				</tr>
 				<tr>
 					<td><input type="hidden" name="id" th:value="${item.id}" />
 						<button type="submit" class="btn btn-dark">Save Edits</button></td>
