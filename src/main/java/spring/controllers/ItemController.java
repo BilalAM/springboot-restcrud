@@ -1,5 +1,7 @@
 package spring.controllers;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import spring.models.Item;
+import spring.models.Review;
 import spring.services.ItemService;
 
 @Controller
@@ -26,6 +29,7 @@ public class ItemController {
 	@RequestMapping(value = "/item/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable int id, Model model) {
 		model.addAttribute("item", itemService.getItem(id));
+		model.addAttribute("reviews", itemService.getItem(id).getReviews());
 		return "view";
 	}
 
@@ -65,6 +69,17 @@ public class ItemController {
 	public String deleteItem(@RequestParam int id) {
 		itemService.deleteItem(id);
 		return "redirect:/items";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/review")
+	public String reviewItem(@RequestParam int id, @RequestParam String reviewContent) {
+		Item item = itemService.getItem(id);
+		Review review = new Review();
+		review.setReviewedItem(item);
+		review.setTimeStamp(LocalDateTime.now().toString());
+		review.setReviewText(reviewContent);
+		itemService.addReview(item, review);
+		return "redirect:/item/view/" + id;
 	}
 
 }

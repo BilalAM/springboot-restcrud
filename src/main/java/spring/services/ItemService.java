@@ -1,7 +1,5 @@
 package spring.services;
 
-import spring.models.ItemRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +8,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import spring.models.Item;
+import spring.models.ReviewRepository;
+import spring.models.ItemRepository;
+import spring.models.Review;
 
 @Service
 public class ItemService {
 
 	@Autowired
 	private ItemRepository itemRepo;
+
+	@Autowired
+	private ReviewRepository reviewRepo;
 
 	@Autowired
 	private TaxService taxService;
@@ -43,6 +47,15 @@ public class ItemService {
 	public void updateItem(int id, Item item) {
 
 		itemRepo.save(item);
+	}
+
+	
+	
+	
+	public void addReview(Item item, Review review) {
+		item.getReviews().add(review);
+		//itemRepo.save(item);
+		reviewRepo.save(review);
 	}
 
 	public double getWholeSum() {
