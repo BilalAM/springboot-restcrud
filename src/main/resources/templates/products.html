@@ -4,47 +4,13 @@
 <title>Products</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
+	href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
 
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../css/main.css" />
-
-
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 
 
 </head>
 <body>
-
-
-
-	<!-- 	<div class="col-md-4"></div>
-	<div class="col-md-4">
-		<div class="table-responsive">
-			<table class="table">
-				<tr>
-					<th>ID</th>
-					<th>PRODUCT NAME</th>
-					<th>VIEW</th>
-				</tr>
-
-				<tr th:each="item : ${items}">
-					<td th:text="${item.id}"></td>
-					<td th:text="${item.name}"></td>
-					<td><a th:href="${'/item/view/' + item.id}">View</a></td>
-					<td>
-						<form action="/delete" method="post">
-							<input type="hidden" name="id" th:value="${item.id}" />
-							<button type="submit" class="btn btn-dark"
-								onclick="return confirm('Sure you want to delete')">Delete</button>
-						</form>
-					</td>
-				</tr>
-
-			</table>
-		</div>
-	</div>
--->
-
 	<h3>PRODUCTS</h3>
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -67,6 +33,9 @@
 								</table>
 							</div>
 							<div class="card-footer">
+								<button type="button" class="btn btn-info btn-lg"
+									data-toggle="modal" data-target="#myModal">Open Large
+									Modal</button>
 								<a th:href="${'/item/view/' + item.id}" style="display: inline;">View</a>
 								<form action="/delete" method="post" style="display: inline;">
 									<input type="hidden" name="id" th:value="${item.id}" />
@@ -82,6 +51,22 @@
 		<div class="col-md-2">
 			<p>total sum of products :</p>
 			<p th:text="${sum}"></p>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<p>This is a large modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -4,10 +4,8 @@
 <title>View Product</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
-
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../css/main.css" />
+	href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" media="screen" />
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -49,5 +47,27 @@
 			</table>
 		</form>
 	</div>
+	<form action="/review" method="post">
+		<input type="hidden" name="id" th:value="${item.id}" />
+		<textarea style="width: 800px" name="reviewContent" id="reviewContent">Enter Review</textarea>
+		<button type="submit" class="btn btn-success">Save</button>
+
+	</form>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card" th:each="review : ${reviews}">
+				<div class="card-header review-header">BILAL ASIF MIRZA</div>
+				<div class="card-body review-content">
+					<p th:text="${review.reviewText}"></p>
+				</div>
+				<div class="card-footer review-footer">
+					<p th:text="${review.timeStamp}"></p>
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+	<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
